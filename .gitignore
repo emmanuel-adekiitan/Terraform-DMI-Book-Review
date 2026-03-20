@@ -1,0 +1,22 @@
+cat <<EOF > .gitignore
+# Terraform local files
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+tfplan
+agentic.tfplan
+
+# Skills & Temp files
+skills/tmp/
+*.log
+
+# App Environment & Node
+book-review-app/.env
+book-review-app/node_modules/
+book-review-app/.next/
+
+# MacOS files
+.DS_Store
+EOF

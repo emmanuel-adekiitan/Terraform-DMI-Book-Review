@@ -1,0 +1,52 @@
+{
+  "subagents": [
+    {
+      "name": "Sentry",
+      "purpose": "Security, Drift Audit, and Environment Validation",
+      "restricted_to": [
+        "skills/validation/*",
+        "skills/lib/*"
+      ],
+      "primary_commands": [
+        "./skills/validation/verify-env.sh",
+        "./skills/validation/check-drift.sh",
+        "./skills/validation/verify-health.sh"
+      ],
+      "exit_conditions": {
+        "on_drift_detected": "Abort and report to Senior Engineer",
+        "on_auth_failure": "Request re-login (az login)"
+      }
+    },
+    {
+      "name": "Pilot",
+      "purpose": "Infrastructure Deployment and Application Sync",
+      "restricted_to": [
+        "skills/core/*",
+        "skills/automation/*",
+        "skills/lib/*"
+      ],
+      "primary_commands": [
+        "./skills/core/apply.sh",
+        "./skills/automation/sync-env.sh"
+      ],
+      "pre_requisites": [
+        "Sentry audit must be GREEN"
+      ],
+      "post_execution": [
+        "Generate .env via sync-env.sh",
+        "Trigger Sentry for health check"
+      ]
+    },
+    {
+      "name": "Janitor",
+      "purpose": "Resource Cleanup and Decommissioning",
+      "restricted_to": [
+        "skills/core/destroy.sh"
+      ],
+      "mandatory_flags": [
+        "--force"
+      ],
+      "warning_level": "CRITICAL"
+    }
+  ]
+}
