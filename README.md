@@ -46,7 +46,7 @@ All actions must be routed through the `hooks.sh` orchestrator to ensure safety 
 
 ### **2. Initialization**
 ```bash
-git clone https://github.com/adekiitan/Terraform-dmi.git
+git clone https://github.com/emmanuel-adekiitan/Terraform-DMI-Book-Review.git 
 cd Terraform-dmi
 terraform -chdir=terraform init
 ```
@@ -63,13 +63,3 @@ Ask Claude:
 * **`LESSONS_LEARNED.md`**: A living document of architectural "gotchas" and fixes.
 
 ---
-
-### **Next Step for You**
-Now that the `README.md` is ready, add it to your git staging and push:
-
-```bash
-git add README.md
-git commit -m "docs: add comprehensive README for Agentic DevOps framework"
-git push
-```
-
