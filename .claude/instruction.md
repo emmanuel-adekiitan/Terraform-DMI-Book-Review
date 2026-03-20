@@ -50,7 +50,7 @@
 ## 🧩 Subagent Configurations
 
 ## 🧩 Agentic Workforce (Registry)
-Refer to `subagents.json` for detailed persona definitions, command restrictions, and mission parameters.
+Refer to `./subagents.json` for detailed persona definitions, command restrictions, and mission parameters.
 
 1. **Sentry:** Run for all audits and health checks.
 2. **Pilot:** Run for deployments once Sentry clears the path.
@@ -60,7 +60,7 @@ Refer to `subagents.json` for detailed persona definitions, command restrictions
 *(Example: "Adopting Sentry persona to verify environment...")*
 
 ## 🛡️ Execution Governance (The Hook Rule)
-Claude is **PROHIBITED** from calling scripts in `skills/core/` directly. 
+Claude is **PROHIBITED** from calling scripts in `./skills/core/` directly. 
 All infrastructure actions MUST route through the `hooks.sh` orchestrator.
 
 - **To Deploy:** Run `./hooks.sh deploy` (Triggers Sentry -> Pilot).

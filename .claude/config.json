@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/emmanueladekiitan/Terraform-dmi"
+      ]
+    },
+    "shell": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-shell"]
+    }
+  },
+  "globalInstructions": "Your primary instructions are in ./.claude/instruction.md and the test protocol is in ./.claude/TEST_PROTOCOL.md. Use the subagent registry in ./.claude/subagents.json to determine your persona."
+}
