@@ -3,7 +3,7 @@ output "vnet_id" {
 }
 
 output "appgw_subnet_id" {
-  value = azurerm_subnet.subnets["snet-web-01"].id
+  value = azurerm_subnet.subnets["snet-appgw"].id
 }
 
 output "app_subnet_id" {
@@ -21,4 +21,8 @@ output "web_subnet_ids" {
 
 output "app_subnet_ids" {
   value = [azurerm_subnet.subnets["snet-app-01"].id, azurerm_subnet.subnets["snet-app-02"].id]
+}
+
+output "db_subnet_ids" {
+  value = [azurerm_subnet.subnets["snet-db-01"].id, azurerm_subnet.subnets["snet-db-02"].id]
 }

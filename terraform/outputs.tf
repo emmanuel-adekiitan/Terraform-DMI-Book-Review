@@ -18,8 +18,12 @@ output "web_vm_private_ips" {
   value       = module.compute.web_vm_ips
 }
 
-# This will be populated once we add the loadbalancer module
+output "app_vm_private_ips" {
+  description = "Private IPs of the App Tier VMs"
+  value       = module.compute.app_vm_ips
+}
+
 output "application_gateway_public_ip" {
   description = "The public entry point for the Book Review App"
-  value       = "Pending Load Balancer Module"
+  value       = module.loadbalancer.public_ip
 }

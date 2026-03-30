@@ -1,5 +1,9 @@
 provider "azurerm" {
-  features {}
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
   subscription_id = var.subscription_id
 }
 
@@ -23,17 +27,29 @@ module "security" {
   vnet_id             = module.network.vnet_id
 }
 
-# 3. DATABASE
+# 3. DB NSG ASSOCIATION (root-level to avoid circular dependency between network and security modules)
+resource "azurerm_subnet_network_security_group_association" "db_nsg" {
+  for_each = tomap({
+    "snet-db-01" = module.network.db_subnet_ids[0]
+    "snet-db-02" = module.network.db_subnet_ids[1]
+  })
+  subnet_id                 = each.value
+  network_security_group_id = module.security.nsg_db_id
+}
+
+# 4. DATABASE
 module "database" {
   source              = "./modules/database"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   vnet_id             = module.network.vnet_id
   db_subnet_id        = module.network.db_subnet_id
+  db_admin_login      = var.db_admin_login
   db_password         = var.db_password
+  db_sku_name         = var.db_sku_name
 }
 
-# 4. COMPUTE (This is likely the missing block!)
+# 5. COMPUTE
 module "compute" {
   source              = "./modules/compute"
   resource_group_name = azurerm_resource_group.rg.name
@@ -44,7 +60,7 @@ module "compute" {
   nsg_app_id          = module.security.nsg_app_id
 }
 
-# 5. LOAD BALANCER
+# 6. LOAD BALANCER
 module "loadbalancer" {
   source              = "./modules/loadbalancer"
   resource_group_name = azurerm_resource_group.rg.name

@@ -18,6 +18,16 @@ variable "db_subnet_id" {
   description = "The delegated subnet ID for MySQL"
 }
 
+variable "db_admin_login" {
+  type        = string
+  description = "The administrator login username for MySQL Flexible Server"
+}
+
+variable "db_sku_name" {
+  type        = string
+  description = "SKU for MySQL Flexible Server. GP_ prefix enables HA; B_ prefix (Burstable) disables HA."
+}
+
 variable "db_password" {
   type        = string
   sensitive   = true

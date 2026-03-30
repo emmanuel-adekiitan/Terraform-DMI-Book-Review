@@ -7,6 +7,7 @@ resource "azurerm_virtual_network" "vnet" {
 
 locals {
   subnets = {
+    "snet-appgw"  = { address = "10.0.0.0/24", zone = "1" } # Dedicated Application Gateway subnet
     "snet-web-01" = { address = "10.0.1.0/24", zone = "1" }
     "snet-web-02" = { address = "10.0.2.0/24", zone = "2" }
     "snet-app-01" = { address = "10.0.3.0/24", zone = "1" }
